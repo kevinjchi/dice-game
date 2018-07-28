@@ -17,7 +17,6 @@ init();
 
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
-	
 	if (gamePlaying) {
 		
 		//1. Random number
@@ -26,7 +25,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 		//2. Display the result
 		var diceDOM = document.querySelector('.dice');
 		diceDOM.style.display = 'block';
-		diceDOM	.src = 'dice-' + dice + '.png';
+		diceDOM.src = 'dice-' + dice + '.png';
 		
 		//3. Update the round score IF the rolled number was NOT a 1
 		if (dice !== 1) {
@@ -35,8 +34,8 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 			document.querySelector('#current-' + activePlayer).textContent = roundScore;
 		} else {
 			nextPlayer();
-		}
-	}	
+		}		
+	}
 });
 
 document.querySelector('.btn-hold').addEventListener('click', function(){
@@ -46,21 +45,21 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 		
 		// Update the UI
 		document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+		
 		// Check if player won the game
-		if (scores[activePlayer] >= 80) {
+		if (scores[activePlayer] >= 20) {
 			document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
 			document.querySelector('.dice').style.display = 'none';
 			document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
 			document.querySelector('.player-' + activePlayer + '-panel').classList.remove('winner');
 			gamePlaying = false;
 		} else {
-			//next player;
+		//next player;
 			nextPlayer();
 		}
-	}
+	}	
 });
 
-document.querySelector('.btn-new').addEventListener('click', init);
 
 // FUNCTION nextPlayer, init.
 
@@ -79,10 +78,14 @@ function nextPlayer() {
 	document.querySelector('.dice').style.display = 'none';
 };
 
+document.querySelector('.btn-new').addEventListener('click', init);
+
+
 function init() {
 	scores = [0, 0];
 	roundScore = 0;
 	activePlayer = 0;
+	gamePlaying =  true;
 	
 	document.querySelector('.dice').style.display = 'none';
 
@@ -98,5 +101,4 @@ function init() {
 	document.querySelector('.player-0-panel').classList.remove('active');
 	document.querySelector('.player-1-panel').classList.remove('active');
 	document.querySelector('.player-0-panel').classList.add('active');
-	document.querySelector('.player-1-panel').classList.remove('active');
 }
